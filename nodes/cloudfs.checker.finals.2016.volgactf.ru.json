@@ -1,0 +1,41 @@
+{
+  "run_list": [
+    "recipe[ntp::default]",
+    "recipe[latest-git::default]",
+    "recipe[themis-finals::python2]",
+    "recipe[dotfiles::default]",
+    "recipe[netdata::default]",
+    "recipe[latest-redis::default]",
+    "recipe[modern_nginx::default]",
+    "recipe[supervisor::default]",
+    "recipe[volgactf-2016-finals-cloudfs-service-checker::default]"
+  ],
+  "environment": "production",
+  "automatic": {
+    "ipaddress": "cloudfs.checker.finals.2016.volgactf.ru"
+  },
+  "dotfiles": {
+    "users": [
+      "root",
+      "vagrant"
+    ]
+  },
+  "latest-redis": {
+    "listen": {
+      "host": "127.0.0.1",
+      "port": 6379
+    }
+  },
+  "volgactf-2016-finals-cloudfs-service-checker": {
+    "revision": "master",
+    "fqdn": "cloudfs.checker.finals.2016.volgactf.ru",
+    "debug": false,
+    "autostart": true,
+    "queue": {
+      "processes": 4
+    }
+  },
+  "supervisor": {
+    "inet_port": "0.0.0.0:9001"
+  }
+}

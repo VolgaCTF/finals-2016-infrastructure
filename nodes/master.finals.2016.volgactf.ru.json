@@ -1,0 +1,65 @@
+{
+  "run_list": [
+    "recipe[ntp::default]",
+    "recipe[latest-git::default]",
+    "recipe[themis-finals::python2]",
+    "recipe[dotfiles::default]",
+    "recipe[netdata::default]",
+    "recipe[latest-redis::default]",
+    "recipe[latest-nodejs::default]",
+    "recipe[modern_nginx::default]",
+    "recipe[supervisor::default]",
+    "recipe[yarn::default]",
+    "recipe[themis-finals::default]"
+  ],
+  "environment": "production",
+  "automatic": {
+    "ipaddress": "master.finals.2016.volgactf.ru"
+  },
+  "dotfiles": {
+    "users": [
+      "root",
+      "vagrant"
+    ]
+  },
+  "themis-finals": {
+    "fqdn": "finals.2016.volgactf.ru",
+    "debug": false,
+    "autostart": true,
+    "backend": {
+      "revision": "master",
+      "server": {
+        "processes": 4
+      },
+      "queue": {
+        "processes": 4
+      }
+    },
+    "frontend": {
+      "revision": "master"
+    },
+    "stream": {
+      "revision": "master"
+    },
+    "live": {
+      "enable": false,
+      "fqdn": "live.finals.2016.volgactf.ru",
+      "server_username": "titan",
+      "server_hostname": "aspyatkin.com",
+      "remote_port": "5000"
+    }
+  },
+  "latest-redis": {
+    "listen": {
+      "host": "127.0.0.1",
+      "port": 6379
+    }
+  },
+  "latest-nodejs": {
+    "install": "lts",
+    "binary": true
+  },
+  "supervisor": {
+    "inet_port": "0.0.0.0:9001"
+  }
+}
